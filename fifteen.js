@@ -66,7 +66,7 @@ document.onreadystatechange = function () {
       alert("Congratulations! You have solved the puzzle!");
 	  document.getElementById("overall").outerHTML= "";
       document.getElementById("celebrate").innerHTML = "<div>" +
-        "<img onClick='location.reload();' src='/images/super-mario.jpg'/></div><br/><h1 class='celebrate' onClick='location.reload();'>Congratulation! You WON!</h1><br/><img src='won.gif'/>";
+        "<img onClick='location.reload();' src='super-mario.jpg'/></div><br/><h1 class='celebrate' onClick='location.reload();'>Congratulation! You WON!</h1><br/><img src='won.gif'/>";
     }
 	
 	document.getElementById("solveButton").onclick = function () {
