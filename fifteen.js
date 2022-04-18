@@ -1,5 +1,6 @@
 var downloadTimer;
 var timeleft = 300;
+//Setting up the Timer for the puzzle solving time
 function timer() {
   if (timeleft <= -1) {
     clearInterval(downloadTimer);
@@ -10,6 +11,7 @@ function timer() {
   }
   timeleft -= 1;
 }
+// Music that will play when there's only 30s left
 var audio = new Audio('30 Second Timer With Jeopardy Thinking Music.mp3')
 audio.loop = true;
 document.onreadystatechange = function () {
@@ -18,7 +20,7 @@ document.onreadystatechange = function () {
     downloadTimer = setInterval(timer, 1000);
     audio.play();
   };
-
+//Listener for solving out the puzzle, that all the pieces will be in the right place
   if (document.readyState == "complete") {
     var grid = [[0, 0, false], [100, 0, false], [200, 0, false], [300, 0, false],
     [0, 100, false], [100, 100, false], [200, 100, false], [300, 100, false],
@@ -45,9 +47,10 @@ document.onreadystatechange = function () {
     function reload() {
       alert("hey")
     }
-
+	  
+    //Shuffle the whole puzzle area into new puzzle
     function shuffle(shuffleTrack) {
-      timeleft = 540;
+      timeleft = 300;
       timer();
       var rand = getElement();
       shiftPuzzlePiece.call(areaContents[rand]);
@@ -61,7 +64,7 @@ document.onreadystatechange = function () {
         document.getElementById("numberCount").innerHTML = numberCount;
       }
     }
-	
+	//Celebration function
 	function celebrate() {
       alert("Congratulations! You have solved the puzzle!");
 	  document.getElementById("overall").outerHTML= "";
@@ -78,7 +81,7 @@ document.onreadystatechange = function () {
       var movables = getMovableCells();
       return movables[Math.floor(Math.random() * movables.length)];
     }
-
+//set the open block
     function openBlock() {
       for (i = 0; i < grid.length; i++) {
         if (grid[i][2] == true) {
@@ -86,7 +89,7 @@ document.onreadystatechange = function () {
         }
       }
     }
-
+//define the right parts 
     function getMovableCells() {
       var open = openBlock()
       var movables = [open - 4, open - 1, open + 1, open + 4]
@@ -100,15 +103,15 @@ document.onreadystatechange = function () {
       movables = movables.filter(function (val) { return val !== null; })
       return movables;
     }
-
+//set up the puzzle piece hover for the puzzle
     function addPuzzlePieceHover() {
       this.className = this.className + " puzzlepiecehover";
     }
-
+//Set up the remove hover for the puzzle	  
     function removePuzzlePieceHover() {
       this.className = "puzzlepiece";
     }
-
+//Function to move the puzzle
     function shiftPuzzlePiece() {
       numberCount = numberCount + 1;
       document.getElementById("numberCount").innerHTML = numberCount;
@@ -133,7 +136,7 @@ document.onreadystatechange = function () {
       if (checkComplete() == true) { return }
       addEventListeners(getMovableCells());
     }
-
+//Function for the parts that was movable 
     function addEventListeners(movables) {
       for (i = 0; i < movables.length; i++) {
         areaContents[movables[i]].addEventListener("mouseover", addPuzzlePieceHover, false);
@@ -141,7 +144,7 @@ document.onreadystatechange = function () {
         areaContents[movables[i]].addEventListener("click", shiftPuzzlePiece);
       }
     }
-
+//Remove the old position parts
     function removeEventListeners(movables) {
       for (i = 0; i < movables.length; i++) {
         areaContents[movables[i]].removeEventListener("mouseover", addPuzzlePieceHover, false);
@@ -149,7 +152,7 @@ document.onreadystatechange = function () {
         areaContents[movables[i]].removeEventListener("click", shiftPuzzlePiece, false);
       }
     }
-
+//set up the Area for the puzzle
     function initializeArea() {
       var x = 0;
       var y = 0;
